@@ -24,4 +24,4 @@ Route::get('/user/{id}/courses', [UserController::class, 'showCourse'])->name('s
 Route::get('/course/{id}/users', [CourseController::class, 'showUsers'])->name('showUsers');
 
 #show all teeachers from a student model
-Route::get('/teacher/id/users', [TeacherController::class, 'showStudent'])->name('showStudent');
+Route::get('/teacher/{id}/students', [TeacherController::class, 'showStudent'])->name('showStudent');
