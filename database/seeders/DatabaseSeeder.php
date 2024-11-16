@@ -15,12 +15,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Teacher::factory(10)->create()->each(function ($teacher){
-            Student::factory(10)->create([
-                'teacher_id' => $teacher->id,
-                'name' => fake()->name(),
-                'age' => fake()->randomElement([1, 23])
-            ]);
+        Teacher::factory(10)->create()->each(function ($teacher) {
+            // Generate a unique set of names for the 10 students
+            $names = collect()->times(10, fn () => fake()->unique()->name);
+
+            // Create students for the teacher
+            $names->each(function ($name) use ($teacher) {
+                Student::factory()->create([
+                    'teacher_id' => $teacher->id,
+                    'name' => $name, // Assign a unique name
+                    'age' => fake()->numberBetween(18, 25), // Assign age
+                ]);
+            });
+
+            // Reset unique constraints for Faker
+            fake()->unique(true);
         });
     }
 }
