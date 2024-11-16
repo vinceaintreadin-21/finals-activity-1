@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TeacherController;
 
 
 Route::get('/', function () {
@@ -21,3 +22,6 @@ Route::get('/user/{id}/courses', [UserController::class, 'showCourse'])->name('s
 
 #show all users from a course model
 Route::get('/course/{id}/users', [CourseController::class, 'showUsers'])->name('showUsers');
+
+#show all teeachers from a student model
+Route::get('/teacher/id/users', [TeacherController::class, 'showStudent'])->name('showStudent');
