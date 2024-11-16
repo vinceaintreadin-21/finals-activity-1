@@ -13,23 +13,5 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
-    {
-        Teacher::factory(10)->create()->each(function ($teacher) {
-            // Generate a unique set of names for the 10 students
-            $names = collect()->times(10, fn () => fake()->unique()->name);
-
-            // Create students for the teacher
-            $names->each(function ($name) use ($teacher) {
-                Student::factory()->create([
-                    'teacher_id' => $teacher->id,
-                    'name' => $name, // Assign a unique name
-                    'age' => fake()->numberBetween(18, 25), // Assign age
-                ]);
-            });
-
-            // Reset unique constraints for Faker
-            fake()->unique(true);
-        });
-    }
+    public function run() { $this->call([ UserSeeder::class, ProfileSeeder::class, CourseSeeder::class, UserCourseSeeder::class, ]); }
 }
